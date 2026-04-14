@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم التسجيل بنجاح | Emmigration.online</title>
+    <meta name="description" content="تم تسجيل طلبك بنجاح - سيتم التواصل معك عبر واتساب">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-success">
+    <div class="success-container">
+        <div class="success-card reveal">
+            <!-- Success Animation -->
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <div class="checkmark draw"></div>
+                </div>
+            </div>
+
+            <div class="success-content">
+                <span class="success-badge">✓ اكتمل التسجيل</span>
+                <h1 class="success-title">تم تسجيل طلبك بنجاح</h1>
+                <p class="success-message">
+                    شكراً لتسجيلك معنا. لقد استلمنا بياناتك وموعد مقابلتك. سيتم التواصل معك عبر واتساب خلال <strong>24-48 ساعة</strong> لتأكيد التفاصيل وإرسال رابط المقابلة.
+                </p>
+
+                <!-- WhatsApp Contact Card -->
+                <div class="whatsapp-card">
+                    <div class="whatsapp-header">
+                        <span class="whatsapp-icon">💬</span>
+                        <span>رقم التواصل المباشر</span>
+                    </div>
+                    <div class="whatsapp-number">
+                        <a href="https://wa.me/447490908644" target="_blank" class="whatsapp-link-large">
+                            <span class="phone-icon">📱</span>
+                            <span class="phone-number">+44 7490 908644</span>
+                            <span class="whatsapp-action">اضغط للتواصل</span>
+                        </a>
+                    </div>
+                    <p class="whatsapp-note">يمكنك حفظ هذا الرقم للتواصل المباشر مع فريقنا</p>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="next-steps">
+                    <h3>الخطوات التالية:</h3>
+                    <ul class="steps-list">
+                        <li class="step-item completed">
+                            <span class="step-check">✓</span>
+                            <span>استلام تأكيد عبر الواتساب</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">2</span>
+                            <span>إرسال رابط Zoom للمقابلة</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">3</span>
+                            <span>إجراء مقابلة التحقق من الهوية</span>
+                        </li>
+                        <li class="step-item">
+                            <span class="step-number">4</span>
+                            <span>تقديم عرض العمل المناسب</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="success-actions">
+                    <a href="index.html" class="btn btn-secondary">العودة للرئيسية</a>
+                    <a href="https://wa.me/447490908644" target="_blank" class="btn btn-whatsapp">
+                        <span>التواصل عبر واتساب</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple reveal animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.success-card');
+            setTimeout(() => {
+                card.classList.add('revealed');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
