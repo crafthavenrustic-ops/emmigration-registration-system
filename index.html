@@ -6,10 +6,10 @@
     <title>Emmigration.online | فرص عمل في أوروبا وكندا</title>
     <meta name="description" content="سجل للحصول على فرص عمل في أوروبا وكندا - منصة موثوقة للهجرة والتوظيف">
     
-    <!-- Google Fonts: Tajawal for elegant Arabic typography -->
+    <!-- Google Fonts: Tajawal for Arabic, Inter for Latin/French -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -48,7 +48,7 @@
                     فرص عمل في أوروبا وكندا
                 </h1>
                 <p class="hero-subtitle reveal">
-                    منصة رسمية متخصصة في تسهيل هجرة العمالة الماهرة إلى أفضل الفرص الوظيفية في أوروبا وكندا. نضمن لك عملية موثوقة وشفافة من البداية直到 الوصول.
+                    منصة رسمية متخصصة في تسهيل هجرة العمالة الماهرة إلى أفضل الفرص الوظيفية في أوروبا وكندا. نضمن لك عملية موثوقة وشفافة من البداية حتى الوصول.
                 </p>
                 <div class="hero-cta reveal">
                     <a href="#form" class="btn btn-primary">ابدأ طلبك الآن</a>
@@ -75,15 +75,15 @@
                     <div class="stats-float">
                         <div class="stat-item">
                             <span class="stat-flag">🇩🇪</span>
-                            <span class="stat-text">ألمانيا</span>
+                            <span class="stat-text">Allemagne</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-flag">🇨🇦</span>
-                            <span class="stat-text">كندا</span>
+                            <span class="stat-text">Canada</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-flag">🇳🇱</span>
-                            <span class="stat-text">هولندا</span>
+                            <span class="stat-flag">🇫🇷</span>
+                            <span class="stat-text">France</span>
                         </div>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <div class="step-content">
                         <div class="step-icon">📝</div>
                         <h3>تعبئة البيانات</h3>
-                        <p>أدخل معلوماتك الرسمية بدقة كما تظهر في جواز السفر</p>
+                        <p>أدخل معلوماتك بالأحرف اللاتينية (Français) كما في جواز السفر</p>
                     </div>
                 </div>
                 
@@ -169,7 +169,7 @@
                 <div class="notice-icon">⚠️</div>
                 <div class="notice-content">
                     <h3>تنبيه مهم: الدقة في البيانات الرسمية</h3>
-                    <p>يرجى إدخال جميع المعلومات <strong>بالضبط</strong> كما تظهر في وثائقك الرسمية (جواز السفر، بطاقة الهوية). أي اختلاف بسيط قد يؤدي إلى رفض الطلب أو تأخير المعالجة. سيتم التحقق من جميع البيانات خلال المقابلة.</p>
+                    <p>يرجى إدخال جميع المعلومات <strong>بالضبط</strong> كما تظهر في وثائقك الرسمية. <strong>الاسم يجب أن يكون بالأحرف اللاتينية (Français/English)</strong> كما في جواز السفر الدولي. أي اختلاف قد يؤدي إلى رفض الطلب.</p>
                 </div>
             </div>
         </div>
@@ -182,40 +182,43 @@
                 <div class="form-header">
                     <span class="form-badge">الخطوة الأولى</span>
                     <h2 class="form-title">نموذج التسجيل المسبق</h2>
-                    <p class="form-subtitle">أكمل بياناتك وسنتواصل معك عبر واتساب خلال 48 ساعة</p>
+                    <p class="form-subtitle">أكمل بياناتك بالأحرف اللاتينية وسنتواصل معك عبر واتساب خلال 48 ساعة</p>
                 </div>
 
                 <form id="registrationForm" class="registration-form" novalidate>
-                    <!-- Full Name - French Format -->
-<div class="form-group">
-    <label for="fullName" class="form-label">
-        الاسم الكامل <span class="required">*</span>
-        <span class="label-hint">(بالأحرف اللاتينية كما في جواز السفر)</span>
-    </label>
-    <input 
-        type="text" 
-        id="fullName" 
-        name="fullName" 
-        class="form-input" 
-        placeholder="Ex: Ahmed Mohamed Ali Al-Sayed"
-        required
-        minlength="3"
-        pattern="[A-Za-z\s\-\.'()]+"
-        dir="ltr"
-        style="text-align: left;"
-    >
-    <span class="error-message" id="fullNameError">
-        الرجاء إدخال الاسم بالأحرف اللاتينية (Français) كما في جواز السفر الدولي
-    </span>
-    <p class="field-note" style="font-size: 0.8rem; color: var(--secondary-500); margin-top: 0.5rem;">
-        💡 <strong>تنبيه:</strong> يجب إدخال الاسم باللغة الفرنسية أو الإنجليزية (الأحرف اللاتينية) بالضبط كما مكتوب في جواز السفر
-    </p>
-</div>
+                    <!-- Full Name - French/Latin Only -->
+                    <div class="form-group">
+                        <label for="fullName" class="form-label">
+                            Nom complet / الاسم الكامل <span class="required">*</span>
+                            <span class="label-hint latin-hint">(en caractères latins / بالأحرف اللاتينية)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            class="form-input latin-input" 
+                            placeholder="Ex: Ahmed Ben Ali / Jean Dupont"
+                            required
+                            minlength="3"
+                            dir="ltr"
+                        >
+                        <div class="input-note">
+                            <span class="note-icon">🇫🇷</span>
+                            <span class="note-text">
+                                <strong>Important:</strong> Veuillez écrire votre nom exactement comme sur votre passeport international (caractères latins uniquement). 
+                                <br>
+                                <strong>تنبيه:</strong> اكتب الاسم بالضبط كما في جواز السفر الدولي (بدون أحرف عربية)
+                            </span>
+                        </div>
+                        <span class="error-message" id="fullNameError">
+                            الرجاء إدخال الاسم بالأحرف اللاتينية (Français) كما في جواز السفر
+                        </span>
+                    </div>
 
                     <!-- Birth Date -->
                     <div class="form-group">
                         <label for="birthDate" class="form-label">
-                            تاريخ الميلاد <span class="required">*</span>
+                            Date de naissance / تاريخ الميلاد <span class="required">*</span>
                             <span class="label-hint">(اختر من التقويم)</span>
                         </label>
                         <input 
@@ -232,32 +235,21 @@
                     <!-- Country -->
                     <div class="form-group">
                         <label for="country" class="form-label">
-                            الدولة <span class="required">*</span>
+                            Pays / الدولة <span class="required">*</span>
                         </label>
                         <select id="country" name="country" class="form-select" required>
-                            <option value="" disabled selected>اختر دولتك</option>
-                            <option value="الأردن">الأردن</option>
-                            <option value="الإمارات">الإمارات العربية المتحدة</option>
-                            <option value="البحرين">البحرين</option>
-                            <option value="الجزائر">الجزائر</option>
-                            <option value="السعودية">السعودية</option>
-                            <option value="السودان">السودان</option>
-                            <option value="الصومال">الصومال</option>
-                            <option value="العراق">العراق</option>
-                            <option value="الكويت">الكويت</option>
-                            <option value="المغرب">المغرب</option>
-                            <option value="اليمن">اليمن</option>
-                            <option value="تونس">تونس</option>
-                            <option value="جيبوتي">جيبوتي</option>
-                            <option value="سوريا">سوريا</option>
-                            <option value="عُمان">عُمان</option>
-                            <option value="فلسطين">فلسطين</option>
-                            <option value="قطر">قطر</option>
-                            <option value="لبنان">لبنان</option>
-                            <option value="ليبيا">ليبيا</option>
-                            <option value="مصر">مصر</option>
-                            <option value="موريتانيا">موريتانيا</option>
-                            <option value="أخرى">دولة أخرى</option>
+                            <option value="" disabled selected>Sélectionnez votre pays / اختر دولتك</option>
+                            <option value="Maroc">Maroc / المغرب</option>
+                            <option value="Algérie">Algérie / الجزائر</option>
+                            <option value="Tunisie">Tunisie / تونس</option>
+                            <option value="Égypte">Égypte / مصر</option>
+                            <option value="Jordanie">Jordanie / الأردن</option>
+                            <option value="Liban">Liban / لبنان</option>
+                            <option value="Syrie">Syrie / سوريا</option>
+                            <option value="Irak">Irak / العراق</option>
+                            <option value="Soudan">Soudan / السودان</option>
+                            <option value="Mauritanie">Mauritanie / موريتانيا</option>
+                            <option value="Autre">Autre / دولة أخرى</option>
                         </select>
                         <span class="error-message" id="countryError">الرجاء اختيار الدولة</span>
                     </div>
@@ -265,8 +257,8 @@
                     <!-- WhatsApp -->
                     <div class="form-group">
                         <label for="whatsapp" class="form-label">
-                            رقم الواتساب <span class="required">*</span>
-                            <span class="label-hint">(مع رمز الدولة)</span>
+                            WhatsApp / واتساب <span class="required">*</span>
+                            <span class="label-hint">(avec indicatif / مع رمز الدولة)</span>
                         </label>
                         <div class="input-wrapper">
                             <span class="input-prefix">+</span>
@@ -275,31 +267,33 @@
                                 id="whatsapp" 
                                 name="whatsapp" 
                                 class="form-input with-prefix" 
-                                placeholder="962791234567"
+                                placeholder="212612345678"
                                 required
-                                pattern="[0-9]{10,15}"
+                                dir="ltr"
                             >
                         </div>
-                        <span class="error-message" id="whatsappError">الرجاء إدخال رقم واتساب صحيح مع رمز الدولة (مثال: 966512345678)</span>
+                        <span class="error-message" id="whatsappError">
+                            Ex: 2126XXXXXXXX pour Maroc / 2162XXXXXXXX pour Tunisie
+                        </span>
                     </div>
 
                     <!-- Message -->
                     <div class="form-group">
                         <label for="message" class="form-label">
-                            ملاحظات إضافية <span class="optional">(اختياري)</span>
+                            Message / ملاحظات <span class="optional">(facultatif / اختياري)</span>
                         </label>
                         <textarea 
                             id="message" 
                             name="message" 
                             class="form-textarea" 
                             rows="4" 
-                            placeholder="أخبرنا باختصار عن مجال عملك أو أي معلومات إضافية ترغب في مشاركتها..."
+                            placeholder="Décrivez votre expérience professionnelle / أخبرنا عن خبرتك المهنية..."
                         ></textarea>
                     </div>
 
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-submit" id="submitBtn">
-                        <span class="btn-text">إرسال الطلب والمتابعة</span>
+                        <span class="btn-text">Envoyer la demande / إرسال الطلب</span>
                         <span class="btn-loader"></span>
                         <span class="btn-icon">←</span>
                     </button>
@@ -316,48 +310,39 @@
     <section id="faq" class="faq-section">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">مساعدة</span>
-                <h2 class="section-title">الأسئلة الشائعة</h2>
+                <span class="section-badge">FAQ / الأسئلة الشائعة</span>
+                <h2 class="section-title">Questions fréquentes</h2>
             </div>
             
             <div class="faq-grid">
                 <div class="faq-item reveal">
                     <button class="faq-question">
-                        <span>هل التسجيل مجاني؟</span>
+                        <span>لماذا يجب كتابة الاسم بالأحرف اللاتينية؟ / Pourquoi en caractères latins?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>نعم، التسجيل المسبق ومراجعة الطلب مجاني تماماً. لا تدفع أي مبلغ إلا بعد الموافقة النهائية على الفرصة الوظيفية وتوقيع العقد.</p>
+                        <p><strong>Français:</strong> Les systèmes d'immigration européens et canadiens utilisent uniquement l'alphabet latin (A-Z). Votre nom doit correspondre exactement à votre passeport international.</p>
+                        <p><strong>العربية:</strong> تستخدم أنظمة الهجرة الأوروبية والكندية الأبجدية اللاتينية فقط. يجب أن يتطابق اسمك تماماً مع جواز السفر الدولي.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item reveal">
                     <button class="faq-question">
-                        <span>ما هي الوثائق المطلوبة للمقابلة؟</span>
+                        <span>هل التسجيل مجاني؟ / L'inscription est-elle gratuite?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>يجب إحضار جواز السفر ساري المفعول، صورة شخصية حديثة، وشهاداتك المهنية أو الجامعية الأصلية للمطابقة.</p>
+                        <p>نعم، التسجيل المسبق ومراجعة الطلب مجاني تماماً. لا تدفع أي مبلغ إلا بعد الموافقة النهائية على الفرصة الوظيفية.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item reveal">
                     <button class="faq-question">
-                        <span>كم تستغرق عملية الهجرة؟</span>
+                        <span>ما هي الوثائق المطلوبة؟ / Quels documents sont nécessaires?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>تتراوح المدة بين 3 إلى 6 أشهر حسب الدولة والبرنامج المختار. نوفر لك متابعة مستمرة لكل مراحل الطلب.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item reveal">
-                    <button class="faq-question">
-                        <span>هل يجب إتقان اللغة الإنجليزية أو الفرنسية؟</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>تختلف المتطلبات حسب نوع العمل. بعض الفرص تتطلب مستوى基础 في اللغة، ونحن نساعدك في تحديد الفرصة المناسبة لمستواك اللغوي.</p>
+                        <p>يجب إحضار جواز السفر ساري المفعول (باسمك اللاتيني)، صورة شخصية حديثة، وشهاداتك المهنية أو الجامعية الأصلية للمطابقة.</p>
                     </div>
                 </div>
             </div>
@@ -376,7 +361,7 @@
                     <p>منصتك الموثوقة للهجرة والعمل في أوروبا وكندا</p>
                 </div>
                 <div class="footer-contact">
-                    <h4>تواصل معنا</h4>
+                    <h4>Contact / تواصل معنا</h4>
                     <a href="https://wa.me/447490908644" class="whatsapp-link" target="_blank">
                         <span>📱</span>
                         <span>+44 7490 908644</span>
@@ -384,7 +369,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Emmigration.online - جميع الحقوق محفوظة</p>
+                <p>© 2026 Emmigration.online - جميع الحقوق محفوظة / Tous droits réservés</p>
             </div>
         </div>
     </footer>
