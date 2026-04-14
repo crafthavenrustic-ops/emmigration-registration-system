@@ -1,6 +1,7 @@
 /**
  * Emmigration.online - Main JavaScript
  * Premium Immigration Pre-registration System
+ * Supports French/Latin character names for international passports
  */
 
 // ==========================================
@@ -16,13 +17,18 @@ const ARABIC_MONTHS = [
     'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
 ];
 
+// French Month Names (optional enhancement)
+const FRENCH_MONTHS = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+];
+
 // ==========================================
 // Utility Functions
 // ==========================================
 
 /**
  * Format date to Arabic formal format: "DD Month YYYY"
- * Example: "14 أبريل 2026"
  */
 function formatArabicDate(dateString) {
     if (!dateString) return '';
@@ -34,19 +40,20 @@ function formatArabicDate(dateString) {
 }
 
 /**
- * Get today's date in YYYY-MM-DD format
+ * Check if text contains Arabic characters
  */
-function getTodayString() {
-    return new Date().toISOString().split('T')[0];
+function containsArabic(text) {
+    const arabicPattern = /[\u0600-\u06FF]/;
+    return arabicPattern.test(text);
 }
 
 /**
- * Get date 30 days from today
+ * Validate Latin/French characters only (A-Z, spaces, hyphens, apostrophes)
  */
-function getMaxDateString() {
-    const date = new Date();
-    date.setDate(date.getDate() + 30);
-    return date.toISOString().split('T')[0];
+function validateLatinCharacters(text) {
+    // Allow: A-Z, a-z, spaces, hyphens, apostrophes, periods, and common French accents
+    const latinPattern = /^[A-Za-z\s\-\.'éèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ]+$/;
+    return latinPattern.test(text);
 }
 
 /**
@@ -65,34 +72,25 @@ function getFormData() {
 }
 
 /**
- * Clear stored form data
- */
-function clearFormData() {
-    localStorage.removeItem('emmigration_form_data');
-    localStorage.removeItem('emmigration_interview_date');
-}
-
-/**
- * Validate WhatsApp number format
- */
-function validateWhatsApp(number) {
-    // Remove any non-digit characters except +
-    const clean = number.replace(/[^\d+]/g, '');
-    // Must be 10-15 digits, optionally starting with +
-    return /^\+?[0-9]{10,15}$/.test(clean);
-}
-
-/**
  * Show error on form field
  */
-function showFieldError(fieldId, show = true) {
+function showFieldError(fieldId, show = true, customMessage = null) {
     const field = document.getElementById(fieldId);
     const errorEl = document.getElementById(fieldId + 'Error');
     const group = field.closest('.form-group');
     
+    if (customMessage && errorEl) {
+        errorEl.textContent = customMessage;
+    }
+    
     if (show) {
         field.classList.add('error');
         group.classList.add('has-error');
+        // Shake animation
+        group.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            group.style.animation = '';
+        }, 500);
     } else {
         field.classList.remove('error');
         group.classList.remove('has-error');
@@ -113,8 +111,19 @@ function setLoading(buttonId, isLoading) {
     }
 }
 
+// Add shake animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+`;
+document.head.appendChild(style);
+
 // ==========================================
-// Scroll Animations (Intersection Observer)
+// Scroll Animations
 // ==========================================
 
 function initScrollAnimations() {
@@ -169,71 +178,97 @@ function initRegistrationForm() {
     const form = document.getElementById('registrationForm');
     if (!form) return;
 
-    // Date input handling - show formatted date below input
+    // Real-time validation for Full Name (Latin only)
+    const fullNameInput = document.getElementById('fullName');
+    if (fullNameInput) {
+        fullNameInput.addEventListener('input', function(e) {
+            const value = e.target.value;
+            
+            // Check if Arabic characters entered
+            if (containsArabic(value)) {
+                showFieldError('fullName', true, 'الرجاء استخدام الأحرف اللاتينية فقط (A-Z). لا تكتب بالعربية هنا.');
+                // Remove Arabic characters
+                e.target.value = value.replace(/[\u0600-\u06FF]/g, '');
+            } else {
+                showFieldError('fullName', false);
+            }
+        });
+    }
+
+    // Date input handling
     const dateInput = document.getElementById('birthDate');
     const dateDisplay = document.getElementById('dateDisplay');
     
-    dateInput.addEventListener('change', function() {
-        if (this.value) {
-            dateDisplay.textContent = 'التاريخ المختار: ' + formatArabicDate(this.value);
-            dateDisplay.style.display = 'block';
-        } else {
-            dateDisplay.style.display = 'none';
-        }
-        showFieldError('birthDate', false);
-    });
-
-    // Real-time validation
-    const fields = ['fullName', 'country', 'whatsapp'];
-    fields.forEach(fieldId => {
-        document.getElementById(fieldId).addEventListener('input', function() {
-            showFieldError(fieldId, false);
+    if (dateInput) {
+        dateInput.addEventListener('change', function() {
+            if (this.value) {
+                const arabicDate = formatArabicDate(this.value);
+                dateDisplay.textContent = 'التاريخ: ' + arabicDate + ' / Date: ' + this.value;
+                dateDisplay.style.display = 'block';
+                showFieldError('birthDate', false);
+            } else {
+                dateDisplay.style.display = 'none';
+            }
         });
+    }
+
+    // Clear errors on input for other fields
+    ['country', 'whatsapp'].forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.addEventListener('input', () => showFieldError(fieldId, false));
+            field.addEventListener('change', () => showFieldError(fieldId, false));
+        }
     });
 
+    // Form submission
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Validation
         let isValid = true;
         
-       // In initRegistrationForm(), replace the fullName validation with:
-
-// Full Name - Must be Latin/French characters
-const fullName = document.getElementById('fullName').value.trim();
-const latinPattern = /^[A-Za-z\s\-\.'()]+$/;
-
-if (fullName.length < 3 || !latinPattern.test(fullName)) {
-    showFieldError('fullName', true);
-    // Show specific error if Arabic detected
-    if (/[\u0600-\u06FF]/.test(fullName)) {
-        alert('الرجاء كتابة الاسم بالأحرف اللاتينية (Français) وليس العربية\nVeuillez écrire votre nom en caractères latins');
-    }
-    isValid = false;
-}
+        // Full Name Validation (Latin/French only)
+        const fullName = document.getElementById('fullName').value.trim();
+        if (fullName.length < 3) {
+            showFieldError('fullName', true, 'الاسم قصير جداً / Nom trop court');
+            isValid = false;
+        } else if (containsArabic(fullName)) {
+            showFieldError('fullName', true, 'يجب كتابة الاسم بالأحرف اللاتينية (Français) وليس العربية');
+            isValid = false;
+        } else if (!validateLatinCharacters(fullName)) {
+            showFieldError('fullName', true, 'استخدم الأحرف الإنجليزية أو الفرنسية فقط (A-Z)');
+            isValid = false;
+        }
         
-        // Birth Date
+        // Birth Date Validation
         const birthDate = document.getElementById('birthDate').value;
         if (!birthDate) {
             showFieldError('birthDate', true);
             isValid = false;
         }
         
-        // Country
+        // Country Validation
         const country = document.getElementById('country').value;
         if (!country) {
             showFieldError('country', true);
             isValid = false;
         }
         
-        // WhatsApp
-        const whatsapp = document.getElementById('whatsapp').value.trim();
-        if (!validateWhatsApp(whatsapp)) {
+        // WhatsApp Validation
+        const whatsapp = document.getElementById('whatsapp').value.trim().replace(/[^\d]/g, '');
+        if (whatsapp.length < 10 || whatsapp.length > 15) {
             showFieldError('whatsapp', true);
             isValid = false;
         }
         
-        if (!isValid) return;
+        if (!isValid) {
+            // Scroll to first error
+            const firstError = document.querySelector('.has-error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
         
         // Collect data
         const formData = {
@@ -241,9 +276,10 @@ if (fullName.length < 3 || !latinPattern.test(fullName)) {
             birthDate: birthDate,
             arabicBirthDate: formatArabicDate(birthDate),
             country: country,
-            whatsapp: whatsapp.startsWith('+') ? whatsapp : '+' + whatsapp,
+            whatsapp: '+' + whatsapp,
             message: document.getElementById('message').value.trim(),
-            submitDate: new Date().toLocaleString('ar-SA')
+            submitDate: new Date().toLocaleString('fr-FR'),
+            language: 'FR/AR'
         };
         
         // Store for next page
@@ -254,7 +290,8 @@ if (fullName.length < 3 || !latinPattern.test(fullName)) {
         
         // Submit to Google Sheets
         try {
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
+            // Note: Using no-cors mode for Google Apps Script
+            await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
@@ -263,8 +300,8 @@ if (fullName.length < 3 || !latinPattern.test(fullName)) {
                 body: JSON.stringify(formData)
             });
             
-            // Wait a bit to show loading state
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Wait for UX
+            await new Promise(resolve => setTimeout(resolve, 1500));
             
             // Redirect to interview scheduling
             window.location.href = 'interview.html';
@@ -272,26 +309,28 @@ if (fullName.length < 3 || !latinPattern.test(fullName)) {
         } catch (error) {
             console.error('Error:', error);
             setLoading('submitBtn', false);
-            alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+            alert('Erreur de connexion / خطأ في الاتصال. Veuillez réessayer / يرجى المحاولة مرة أخرى.');
         }
     });
 }
 
 // ==========================================
-// Interview Page Logic (interview.html)
+// Interview Page Logic
 // ==========================================
 
 function initInterviewPage() {
-    // Load saved data
     const formData = getFormData();
     if (!formData) {
-        // If no data, redirect back to form
         window.location.href = 'index.html';
         return;
     }
     
-    // Display summary
-    document.getElementById('summaryName').textContent = formData.fullName;
+    // Display summary with proper formatting
+    const nameEl = document.getElementById('summaryName');
+    nameEl.textContent = formData.fullName;
+    nameEl.style.fontFamily = "'Inter', sans-serif";
+    nameEl.style.color = "var(--primary-700)";
+    
     document.getElementById('summaryDate').textContent = formData.arabicBirthDate;
     document.getElementById('summaryCountry').textContent = formData.country;
     
@@ -304,16 +343,16 @@ function initInterviewPage() {
 
 function generateCalendar() {
     const grid = document.getElementById('calendarGrid');
+    if (!grid) return;
+    
     const today = new Date();
     const days = ['أحد', 'إثن', 'ثلاث', 'أربع', 'خميس', 'جمعة', 'سبت'];
     
-    // Generate next 14 days
     for (let i = 1; i <= 14; i++) {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
         
-        // Skip Fridays (5)
-        if (date.getDay() === 5) continue;
+        if (date.getDay() === 5) continue; // Skip Friday
         
         const dayName = days[date.getDay()];
         const dayNum = date.getDate();
@@ -338,32 +377,30 @@ function generateCalendar() {
 }
 
 function selectDate(element) {
-    // Remove previous selection
     document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
-    
-    // Select new
     element.classList.add('selected');
     document.getElementById('selectedDate').value = element.dataset.date;
     
-    // Show time slots
     generateTimeSlots();
-    document.getElementById('timeSection').style.display = 'block';
-    
-    // Scroll to time section
-    document.getElementById('timeSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const timeSection = document.getElementById('timeSection');
+    timeSection.style.display = 'block';
+    timeSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function generateTimeSlots() {
     const grid = document.getElementById('timeSlotsGrid');
+    if (!grid) return;
+    
     grid.innerHTML = '';
+    const times = ['10:00', '11:00', '14:00', '15:00', '16:00'];
+    const labels = ['10:00 ص', '11:00 ص', '02:00 م', '03:00 م', '04:00 م'];
     
-    const times = ['10:00 ص', '11:00 ص', '12:00 م', '02:00 م', '03:00 م', '04:00 م'];
-    
-    times.forEach(time => {
+    times.forEach((time, index) => {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'time-slot';
-        btn.textContent = time;
+        btn.textContent = labels[index];
+        btn.dataset.time = time;
         
         btn.addEventListener('click', function() {
             selectTime(this, time);
@@ -377,8 +414,6 @@ function selectTime(element, time) {
     document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
     element.classList.add('selected');
     document.getElementById('selectedTime').value = time;
-    
-    // Enable confirm button
     document.getElementById('confirmBtn').disabled = false;
 }
 
@@ -391,16 +426,14 @@ async function confirmInterview() {
     
     setLoading('confirmBtn', true);
     
-    // Prepare final data
     const finalData = {
         ...formData,
         interviewDate: date,
         interviewTime: time,
         interviewDateArabic: formatArabicDate(date),
-        status: 'Interview Scheduled'
+        status: 'Entretien planifié / مقابلة مجدولة'
     };
     
-    // Update Google Sheets with interview date
     try {
         await fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
@@ -411,19 +444,17 @@ async function confirmInterview() {
             body: JSON.stringify(finalData)
         });
         
-        // Store interview info
         localStorage.setItem('emmigration_interview_date', JSON.stringify({
             date: formatArabicDate(date),
             time: time
         }));
         
-        // Redirect to success
         window.location.href = 'success.html';
         
     } catch (error) {
         console.error('Error:', error);
         setLoading('confirmBtn', false);
-        alert('حدث خطأ في حفظ الموعد. يرجى المحاولة مرة أخرى.');
+        alert('Erreur / خطأ: يرجى المحاولة مرة أخرى');
     }
 }
 
@@ -435,9 +466,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initFAQ();
     initRegistrationForm();
-    
-    // Clear data on success page load (after displaying)
-    if (document.body.classList.contains('page-success')) {
-        setTimeout(clearFormData, 1000);
-    }
 });
