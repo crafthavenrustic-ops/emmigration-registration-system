@@ -9,7 +9,7 @@
 // ==========================================
 
 // ⚠️ IMPORTANT: Replace with your Google Apps Script Web App URL
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0v1qfE1Y4MdOJkqEOe_AAyU8fAFUp24CY0TIqNrhx1yUoAGi3j9ZGixYMxHFAuQ1bgQ/exec';
 
 // Arabic Month Names for Formal Date Display
 const ARABIC_MONTHS = [
