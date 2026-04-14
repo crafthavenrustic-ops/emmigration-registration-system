@@ -197,12 +197,20 @@ function initRegistrationForm() {
         // Validation
         let isValid = true;
         
-        // Full Name
-        const fullName = document.getElementById('fullName').value.trim();
-        if (fullName.length < 3) {
-            showFieldError('fullName', true);
-            isValid = false;
-        }
+       // In initRegistrationForm(), replace the fullName validation with:
+
+// Full Name - Must be Latin/French characters
+const fullName = document.getElementById('fullName').value.trim();
+const latinPattern = /^[A-Za-z\s\-\.'()]+$/;
+
+if (fullName.length < 3 || !latinPattern.test(fullName)) {
+    showFieldError('fullName', true);
+    // Show specific error if Arabic detected
+    if (/[\u0600-\u06FF]/.test(fullName)) {
+        alert('الرجاء كتابة الاسم بالأحرف اللاتينية (Français) وليس العربية\nVeuillez écrire votre nom en caractères latins');
+    }
+    isValid = false;
+}
         
         // Birth Date
         const birthDate = document.getElementById('birthDate').value;
