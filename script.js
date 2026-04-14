@@ -1,4 +1,4 @@
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxNoaiE1k9Zfr3o-6cHD-mlhLUO9QY2B7xBDzJa8tWjVKVHl358zP_5TQCFHjyAZFZhQ/exec';
 const ARABIC_MONTHS = ['يناير','فبراير','مارس','إبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 
 function formatArabicDate(dateString) {
