@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تم التسجيل بنجاح | Emmigration.online</title>
+    <title>تم التسجيل بنجاح / Inscription réussie | Emmigration.online</title>
     <meta name="description" content="تم تسجيل طلبك بنجاح - سيتم التواصل معك عبر واتساب">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,55 +23,59 @@
             </div>
 
             <div class="success-content">
-                <span class="success-badge">✓ اكتمل التسجيل</span>
+                <span class="success-badge">✓ اكتمل التسجيل / Inscription complétée</span>
                 <h1 class="success-title">تم تسجيل طلبك بنجاح</h1>
                 <p class="success-message">
-                    شكراً لتسجيلك معنا. لقد استلمنا بياناتك وموعد مقابلتك. سيتم التواصل معك عبر واتساب خلال <strong>24-48 ساعة</strong> لتأكيد التفاصيل وإرسال رابط المقابلة.
+                    شكراً لتسجيلك معنا. لقد استلمنا بياناتك وموعد مقابلتك. 
+                    <br><br>
+                    <strong>Merci de votre inscription.</strong> Nous avons bien reçu vos données et votre rendez-vous.
+                    <br><br>
+                    سيتم التواصل معك عبر واتساب خلال <strong>24-48 ساعة</strong> / Nous vous contacterons via WhatsApp dans les 24-48 heures.
                 </p>
 
                 <!-- WhatsApp Contact Card -->
                 <div class="whatsapp-card">
                     <div class="whatsapp-header">
                         <span class="whatsapp-icon">💬</span>
-                        <span>رقم التواصل المباشر</span>
+                        <span>رقم التواصل المباشر / Contact direct</span>
                     </div>
                     <div class="whatsapp-number">
                         <a href="https://wa.me/447490908644" target="_blank" class="whatsapp-link-large">
                             <span class="phone-icon">📱</span>
                             <span class="phone-number">+44 7490 908644</span>
-                            <span class="whatsapp-action">اضغط للتواصل</span>
+                            <span class="whatsapp-action">اضغط للتواصل / Cliquer pour discuter</span>
                         </a>
                     </div>
-                    <p class="whatsapp-note">يمكنك حفظ هذا الرقم للتواصل المباشر مع فريقنا</p>
+                    <p class="whatsapp-note">يمكنك حفظ هذا الرقم للتواصل المباشر / Vous pouvez sauvegarder ce numéro</p>
                 </div>
 
                 <!-- Next Steps -->
                 <div class="next-steps">
-                    <h3>الخطوات التالية:</h3>
+                    <h3>الخطوات التالية / Prochaines étapes:</h3>
                     <ul class="steps-list">
                         <li class="step-item completed">
                             <span class="step-check">✓</span>
-                            <span>استلام تأكيد عبر الواتساب</span>
+                            <span>استلام تأكيد عبر الواتساب / Confirmation WhatsApp</span>
                         </li>
                         <li class="step-item">
                             <span class="step-number">2</span>
-                            <span>إرسال رابط Zoom للمقابلة</span>
+                            <span>إرسال رابط Zoom للمقابلة / Lien Zoom envoyé</span>
                         </li>
                         <li class="step-item">
                             <span class="step-number">3</span>
-                            <span>إجراء مقابلة التحقق من الهوية</span>
+                            <span>إجراء مقابلة التحقق / Entretien de vérification</span>
                         </li>
                         <li class="step-item">
                             <span class="step-number">4</span>
-                            <span>تقديم عرض العمل المناسب</span>
+                            <span>تقديم عرض العمل / Offre d'emploi</span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="success-actions">
-                    <a href="index.html" class="btn btn-secondary">العودة للرئيسية</a>
+                    <a href="index.html" class="btn btn-secondary">العودة للرئيسية / Accueil</a>
                     <a href="https://wa.me/447490908644" target="_blank" class="btn btn-whatsapp">
-                        <span>التواصل عبر واتساب</span>
+                        <span>التواصل عبر واتساب / Contacter WhatsApp</span>
                         <span>→</span>
                     </a>
                 </div>
@@ -80,12 +84,17 @@
     </div>
 
     <script>
-        // Simple reveal animation on load
         document.addEventListener('DOMContentLoaded', function() {
             const card = document.querySelector('.success-card');
             setTimeout(() => {
                 card.classList.add('revealed');
             }, 100);
+            
+            // Clear stored data after 2 seconds
+            setTimeout(() => {
+                localStorage.removeItem('emmigration_form_data');
+                localStorage.removeItem('emmigration_interview_date');
+            }, 2000);
         });
     </script>
 </body>
