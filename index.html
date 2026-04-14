@@ -186,23 +186,31 @@
                 </div>
 
                 <form id="registrationForm" class="registration-form" novalidate>
-                    <!-- Full Name -->
-                    <div class="form-group">
-                        <label for="fullName" class="form-label">
-                            الاسم الكامل <span class="required">*</span>
-                            <span class="label-hint">(كما في جواز السفر)</span>
-                        </label>
-                        <input 
-                            type="text" 
-                            id="fullName" 
-                            name="fullName" 
-                            class="form-input" 
-                            placeholder="مثال: أحمد محمد عبدالله العلي"
-                            required
-                            minlength="3"
-                        >
-                        <span class="error-message" id="fullNameError">الرجاء إدخال الاسم الكامل كما في الوثائق الرسمية</span>
-                    </div>
+                    <!-- Full Name - French Format -->
+<div class="form-group">
+    <label for="fullName" class="form-label">
+        الاسم الكامل <span class="required">*</span>
+        <span class="label-hint">(بالأحرف اللاتينية كما في جواز السفر)</span>
+    </label>
+    <input 
+        type="text" 
+        id="fullName" 
+        name="fullName" 
+        class="form-input" 
+        placeholder="Ex: Ahmed Mohamed Ali Al-Sayed"
+        required
+        minlength="3"
+        pattern="[A-Za-z\s\-\.'()]+"
+        dir="ltr"
+        style="text-align: left;"
+    >
+    <span class="error-message" id="fullNameError">
+        الرجاء إدخال الاسم بالأحرف اللاتينية (Français) كما في جواز السفر الدولي
+    </span>
+    <p class="field-note" style="font-size: 0.8rem; color: var(--secondary-500); margin-top: 0.5rem;">
+        💡 <strong>تنبيه:</strong> يجب إدخال الاسم باللغة الفرنسية أو الإنجليزية (الأحرف اللاتينية) بالضبط كما مكتوب في جواز السفر
+    </p>
+</div>
 
                     <!-- Birth Date -->
                     <div class="form-group">
